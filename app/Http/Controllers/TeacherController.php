@@ -28,17 +28,11 @@ class TeacherController extends Controller
     }
     public function show($id){
         $teacher = Teacher::find($id);
-        if (!$teacher) {
-            return response()->json(['message' => 'Teacher not found'], 404);
-        }
+
         return view('show', compact('teacher'));
     }
     public function update(Request $request, $id){
         $teacher = Teacher::find($id);
-        if (!$teacher) {
-            return response()->json(['message' => 'Teacher not found'], 404);
-        }
-
         $teacher->nombre = $request->nombre ?? $teacher->nombre;
         $teacher->cedula = $request->cedula ?? $teacher->cedula;
         $teacher->direccion = $request->direccion ?? $teacher->direccion;
@@ -49,17 +43,11 @@ class TeacherController extends Controller
     }
     public function destroy($id){
         $teacher = Teacher::find($id);
-        if (!$teacher) {
-            return response()->json(['message' => 'Teacher not found'], 404);
-        }
         $teacher->delete();
         return redirect()->route('profesores.index');
     }
     public function edit($id) {
         $teacher = Teacher::find($id);
-        if (!$teacher) {
-            return response()->json(['message' => 'Teacher not found'], 404);
-        }
         return view('edit', compact('teacher'));
     }
 }
